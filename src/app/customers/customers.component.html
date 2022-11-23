@@ -1,0 +1,18 @@
+<div class="container mt-2 d-flex flex-wrap justify-content-evenly">
+    <div *ngFor="let cust of customers">
+        <div class="card m-2 overflow-auto" style="width: 18rem;">
+            <div [ngSwitch]="cust.gender" class="m-auto">
+                <img *ngSwitchCase="'male'" src="../../assets/male.png" class="card-img-top mt-1" alt="img">
+                <img *ngSwitchCase="'female'" src="../../assets/female.png" class="card-img-top mt-1" alt="img">
+                <img *ngSwitchDefault src="../../assets/commonLogo.jpg" class="card-img-top mt-1" alt="img">
+            </div>
+            <div class="card-body d-flex flex-column justify-content-around">
+                <h5 class="card-title">{{cust.name}}</h5>
+                <p class="card-text">{{cust.skills}}</p>
+                <p class="card-text">{{cust.desc}}</p>
+                <button class="btn btn-primary" (click)="onEditClick(cust)">Edit</button>
+                <button class="btn btn-danger mt-2" (click)="delete(cust)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

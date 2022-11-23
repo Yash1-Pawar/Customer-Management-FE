@@ -1,0 +1,30 @@
+<div class="container-fluid row">
+    <div class="d-flex">
+        <h1 class="m-auto"><b>Add Customer</b></h1>
+    </div>
+    <div class="mt-2 col-6 offset-3">
+        <form (ngSubmit)="onsubmit()">
+            <div class="mb-3">
+                <label for="id" class="form-label">Unique Id</label>
+                <input type="text" class="form-control" id="id" [(ngModel)]="customer.id" name="id">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <input type="text" class="form-control" id="gender" [(ngModel)]="customer.gender" name="gender">
+            </div>
+            <div class="mb-3">
+                <label for="skills" class="form-label">Skills</label>
+                <input type="text" class="form-control" id="skills" [(ngModel)]="customer.skills" name="skills">
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">About yourself</label>
+                <textarea class="form-control" id="desc" rows="2.5" [(ngModel)]="customer.desc" name="desc"></textarea>
+            </div>
+            <button type="submit" class="btn col-6 offset-3 mb-2">Submit</button>
+        </form>
+    </div>
+</div>

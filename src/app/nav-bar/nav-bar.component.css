@@ -1,0 +1,18 @@
+.heading {
+    font-size: 5em;
+}
+
+.homy{
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.cus {
+    font-size: 4em;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline yellowgreen;
+}
