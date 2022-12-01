@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { CustomersComponent } from './customers/customers.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UpdateComponent } from './update/update.component';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
 
 const routes: Routes = [
+  { path: "home", component: NavBarComponent },
   { path: "customers", component: CustomersComponent },
   { path: "addCustomer", component: AddCustComponent },
-  { path: "home", component: NavBarComponent },
-  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "update/:id", component: UpdateComponent },
+  { path: "viewCustomer/:id", component: ViewCustomerComponent },
+  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "**", redirectTo: "home", pathMatch: "full" }
 ];
 

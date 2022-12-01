@@ -3,11 +3,11 @@
 }
 
 .btn {
-    background-color: #7a11cb;
-    color: whitesmoke;
+    /* background-color: #7a11cb;
+    color: whitesmoke; */
     border-radius: 2rem;
 }
 
 .btn:hover{
-    background-color: #9000ff;
+    box-shadow: 0px 0px 25px -3px cyan !important;
 }

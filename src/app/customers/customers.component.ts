@@ -10,10 +10,9 @@ import { ServiceService } from '../service.service';
 })
 export class CustomersComponent implements OnInit {
 
-  customers: Customer[] = [new Customer("101", "Yash Pawar", "Java, SpringBoot, Angular", "Lorem ipsum dolor sit, amet consectetur adipisicing elit.", "male"), new Customer("102", "Sonali", "Java, SpringBoot, ReactJs", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit.", "female")];
+  customers: Customer[] = [new Customer("101", "Yash Pawar", "Java, SpringBoot, Angular", "Lorem ipsum dolor sit, amet consectetur adipisicing elit.", "male")];
 
   constructor(private service: ServiceService, private router: Router) {
-    this.getAllCustomers();
   }
 
   getAllCustomers() {
@@ -25,12 +24,14 @@ export class CustomersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.customers = [new Customer("101", "Yash Pawar", "Java, SpringBoot, Angular", "Lorem ipsum dolor sit, amet consectetur adipisicing elit.", "male")];
+    this.getAllCustomers();
   }
 
   delete(customer: Customer) {
     if (confirm("Do you want to delete?")) {
       this.service.deleteCustomer(customer.id).subscribe(()=>{
-        this.getAllCustomers();
+        this.ngOnInit();
       });
     }
   }
@@ -39,4 +40,7 @@ export class CustomersComponent implements OnInit {
     this.router.navigate(["/update", customer.id]);
   }
 
+  onViewClick(customer:Customer) {
+    this.router.navigate(["/viewCustomer", customer.id]);
+  }
 }

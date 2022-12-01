@@ -1,0 +1,38 @@
+
+    <div class="d-flex flex-column align-items-center">
+        <div class="card m-2 overflow-auto" style="width: 18rem;">
+            <div [ngSwitch]="customer.gender" class="m-auto">
+                <img *ngSwitchCase="'male'" src="../../assets/male.png" class="card-img-top mt-1" alt="img">
+                <img *ngSwitchCase="'female'" src="../../assets/female.png" class="card-img-top mt-1" alt="img">
+                <img *ngSwitchDefault src="../../assets/commonLogo.jpg" class="card-img-top mt-1" alt="img">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" (click)="onEditClick(customer)">Edit</button>
+        <h1>{{customer.name}}</h1>
+        <p>{{customer.skills}}</p>
+    </div>
+
+<div class="container">
+    <h1 class="btn btn-warning text-uppercase fs-3">Friends</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Customer Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Skills</th>
+                <th scope="col">Gender</th>
+                <th scope="col">View</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let f of customer.friends">
+            <tr>
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.name}}</td>
+                <td>{{f.skills}}</td>
+                <td>{{f.gender}}</td>
+                <td><button type="button" class="btn btn-outline-warning" (click)="viewFriend(f.id)">View
+                        Friend</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

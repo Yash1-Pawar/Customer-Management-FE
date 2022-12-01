@@ -10,7 +10,8 @@
                 <h5 class="card-title">{{cust.name}}</h5>
                 <p class="card-text">{{cust.skills}}</p>
                 <p class="card-text">{{cust.desc}}</p>
-                <button class="btn btn-primary" (click)="onEditClick(cust)">Edit</button>
+                <button class="btn btn-secondary mt-2" (click)="onViewClick(cust)">View Customer</button>
+                <button class="btn btn-primary mt-2" (click)="onEditClick(cust)">Edit</button>
                 <button class="btn btn-danger mt-2" (click)="delete(cust)">Delete</button>
             </div>
         </div>
