@@ -1,0 +1,27 @@
+.card {
+    height: 25rem;
+    /* overflow: auto; */
+}
+
+/* .mt-2 {
+    margin-top: 3.5rem !important;
+} */
+.card:hover {
+    background-color: rgb(255, 84, 175);
+    box-shadow: 0px 0px 20px black;
+    animation: animy 0.2s ease-in-out 1;
+}
+
+@keyframes animy {
+    from {
+        box-shadow: 0px 0px 0px -6px #000000;
+    }
+
+    to {
+        box-shadow: 0px 0px 18px -6px #000000;
+    }
+}
+
+img {
+    width: 10em;
+}

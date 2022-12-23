@@ -1,13 +1,13 @@
 export class Customer {
-    [x: string]: any;
 
     id?:any;
     name!: string | undefined;
     skills!: string | undefined;
     desc?: string;
     gender?: string;
-    friends: Customer[] = [];
-
+    customers: Customer[] = [];
+    friends: string[] = [];
+    
     constructor(id?:any, name?: string, skills?: string, desc?: string, gender?: string) {
         this.id=id;
         this.name = name;
