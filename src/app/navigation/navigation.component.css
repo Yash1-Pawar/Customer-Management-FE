@@ -1,0 +1,30 @@
+.active{
+    color: deeppink !important;
+}
+.active:hover{
+    color: whitesmoke !important;
+}
+.nav{
+    padding: 0.2rem 0;
+    background-color: rgb(0, 0, 0);
+    z-index: 1;
+}
+.nav-link{
+    color: yellowgreen;
+}
+.nav-item:hover{
+    /* border: 1px solid deeppink; */
+    background-color: deeppink;
+    border-radius: 5rem;
+}
+.nav-link:hover{
+    color: black;
+}
+
+.navbar{
+    position: sticky;    
+}
+
+.navbar-brand img {
+    width: 2rem;
+}

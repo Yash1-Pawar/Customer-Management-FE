@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-3">
+        <div class="logintext">Login Form</div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="userId" placeholder="User Id" formControlName="userId">
+            <label for="userId">User Id</label>
+            <div *ngIf="loginForm.touched && userId.status == 'INVALID' " class="error">
+                User ID must be 6-8 digits long & must only contain digits
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+            <label for="password">Password</label>
+            <div *ngIf="loginForm.touched && password.status == 'INVALID' " class="error">
+                Password length must greater than eight & must contains atleast one UpperCase, one LowerCase, one digit,
+                one special character
+            </div>
+        </div>
+        <button type="submit" [disabled]="loginForm.status == 'INVALID'"
+            class="btn btn-success submit mb-3">Submit</button>
+    </form>
+</div>
+
+<button class="btn btn-success submit mb-3" (click)="all()">get all cust</button>

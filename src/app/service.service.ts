@@ -1,19 +1,37 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from './model/Cutomer';
+import { Login } from './model/Login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  private baseUrl: string = "http://localhost:8080/customerApp/";
-
   constructor(private httpClient: HttpClient) { }
 
-  getAllCustomers(): Observable<Customer[]> {
-    return this.httpClient.get<Customer[]>(this.baseUrl + "getAllCustomers");
+  private baseUrl: string = "http://localhost:8080/customerApp/";
+
+  private baseUrlForAuth: string = "http://localhost:8080/jwt/";
+
+  options = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+  }
+
+  login(login: Login): Observable<any> {
+    return this.httpClient.post(this.baseUrlForAuth + "getToken", login);
+  }
+
+  getAllCustomers(): Observable<any> {
+    console.log(this.options)
+    return this.httpClient.get(this.baseUrl + "getAllCustomers", {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      })
+    });
   }
 
   addCustomer(customer: Customer): Observable<any> {

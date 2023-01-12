@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCustComponent } from './add-cust/add-cust.component';
 import { AppComponent } from './app.component';
 import { CustomersComponent } from './customers/customers.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarComponent } from './home/nav-bar.component';
 import { SearchCustomerComponent } from './search-customer/search-customer.component';
 import { UpdateComponent } from './update/update.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';

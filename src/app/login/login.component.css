@@ -1,0 +1,26 @@
+.container {
+    background-color: #1d2038;
+    width: 40vw;
+    border-radius: 10px;
+}
+
+.submit{
+    height: 50px;
+    width: 150px;
+    border-radius: 8px;
+    translate: 165px;
+}
+
+.error{
+    color: red;
+    border-radius: 5px;
+    margin: 2px;
+    padding-left: 2px;
+}
+
+.logintext {
+    color: yellow;
+    text-align: center;
+    transform: scale(2.5);
+    padding: 10px 0px 15px 0px;
+}
