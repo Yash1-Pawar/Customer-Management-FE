@@ -22,7 +22,11 @@ export class UpdateComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.custService.getCustomerById(this.id).subscribe((res) => {
-      this.customer = res;
+      this.customer.id = res.id;
+      this.customer.name = res.name;
+      this.customer.gender = res.gender;
+      this.customer.skills = res.skills;
+      this.customer.desc = res.desc;
     });
   }
 
