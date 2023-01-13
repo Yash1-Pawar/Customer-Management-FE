@@ -14,7 +14,7 @@ export class UpdateComponent implements OnInit {
   @Input() edit: Customer = new Customer;
 
   customer: Customer = new Customer;
-  id!: number;
+  id!: string;
 
   constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute) {
   }

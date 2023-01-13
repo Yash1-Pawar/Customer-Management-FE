@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm);
-    this.loginDTO.id = this.loginForm.get('userId')?.value;
-    this.loginDTO.password = this.loginForm.get('password')?.value;
+    this.loginDTO.id = this.userId?.value;
+    this.loginDTO.password = this.password?.value;
     this.service.login(this.loginDTO).subscribe((response)=>{
       console.log(response.token);
       localStorage.setItem('token' , response.token);

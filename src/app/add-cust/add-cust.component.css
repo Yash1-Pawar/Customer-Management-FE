@@ -1,13 +1,28 @@
-.gend {
-    display: inline-block;
+.container {
+    background-color: #1d2038;
+    width: 50vw;
+    border-radius: 10px;
+    padding: 0px 40px 0px 40px;
 }
 
-.btn {
-    /* background-color: #7a11cb;
-    color: whitesmoke; */
-    border-radius: 2rem;
+.submit{
+    height: 50px;
+    width: 180px;
+    border-radius: 8px;
+    translate: 170px;
 }
 
-.btn:hover{
-    box-shadow: 0px 0px 25px -3px cyan !important;
+.error{
+    color: red;
+    border-radius: 5px;
+    margin: 2px;
+    padding-left: 2px;
+}
+
+.registrationtext {
+    color: yellow;
+    text-align: center;
+    padding: 10px 0px 15px 0px;
+    font-size: 50px;
+    font-family: 'Roboto Slab', serif;
 }

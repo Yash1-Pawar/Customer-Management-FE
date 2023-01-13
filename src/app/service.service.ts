@@ -15,38 +15,51 @@ export class ServiceService {
 
   private baseUrlForAuth: string = "http://localhost:8080/jwt/";
 
-  options = {
-    headers: new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-    })
-  }
-
   login(login: Login): Observable<any> {
     return this.httpClient.post(this.baseUrlForAuth + "getToken", login);
   }
 
+  addCustomer(customer: Customer): Observable<any> {
+    return this.httpClient.post(this.baseUrlForAuth + "registerUser", customer);
+  }
+
   getAllCustomers(): Observable<any> {
-    console.log(this.options)
-    return this.httpClient.get(this.baseUrl + "getAllCustomers", {
+    let options = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       })
-    });
-  }
-
-  addCustomer(customer: Customer): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "addCustomer", customer, { responseType: 'text' });
+    }
+    console.log(localStorage.getItem('token'))
+    return this.httpClient.get(this.baseUrl + "getAllCustomers", options);
   }
 
   deleteCustomer(id: number): Observable<any> {
-    return this.httpClient.delete(this.baseUrl + "deleteCustomer/" + id, { responseType: 'text' });
+    let options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        responseType: 'text' as 'json'
+      })
+    }
+    return this.httpClient.delete(this.baseUrl + "deleteCustomer/" + id, options);
   }
 
   updateCustomer(customer: Customer): Observable<any> {
-    return this.httpClient.put(this.baseUrl + "updateCustomer/" + customer.id, customer, { responseType: 'text' });
+    console.log('edit: ' + JSON.stringify(customer))
+    let options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        responseType: 'text'
+      })
+    }
+    return this.httpClient.put(this.baseUrl + "updateCustomer/" + customer.id, customer, options);
   }
 
-  getCustomerById(id: number): Observable<Customer> {
-    return this.httpClient.get<Customer>(this.baseUrl + "getCustomer/" + id);
+  getCustomerById(id: string): Observable<Customer> {
+    let options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      })
+    }
+    return this.httpClient.get<Customer>(this.baseUrl + "getCustomer/" + id, options);
   }
 }

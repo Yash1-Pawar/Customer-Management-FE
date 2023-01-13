@@ -11,29 +11,34 @@ import { ServiceService } from '../service.service';
 export class ViewCustomerComponent implements OnInit {
 
   customer: Customer = new Customer;
-  id!: number;
+  id!: string;
 
   constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    this.custService.getCustomerById(this.id).subscribe((res) => {
-      console.log(res);
-      this.customer = res;
-      scrollTo(0, 0);
-    }, () => { }, () => {
-      this.customer.customers = [];
-      this.customer.friends.forEach(cust => {
-        this.custService.getCustomerById(Number.parseInt(cust)).subscribe((result) => {
-          this.customer.customers.push(result);
+    this.custService.getCustomerById(this.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.customer = res;
+        scrollTo(0, 0);
+      }, complete: () => {
+        this.customer.customers = [];
+        console.log(this.customer.friends);
+        this.customer.friends.forEach(cust => {
+          if (cust != "" && cust != null) {
+            this.custService.getCustomerById(cust).subscribe((result) => {
+              this.customer.customers.push(result);
+            })
+          }
         })
-      })
-      this.customer.customers.sort((a, b) => {
-        if (a.id > b.id) return 1;
-        else if (a.id < b.id) return -1;
-        else return 0;
-      });
+        this.customer.customers.sort((a, b) => {
+          if (a.id > b.id) return 1;
+          else if (a.id < b.id) return -1;
+          else return 0;
+        });
+      }
     });
   }
 
@@ -45,7 +50,7 @@ export class ViewCustomerComponent implements OnInit {
     this.router.navigate(['/myrsearchCustomeroute'], { queryParams: { index: 1 } });
   }
 
-  viewFriend(id: number) {
+  viewFriend(id: string) {
     this.id = id;
     this.ngOnInit();
   }

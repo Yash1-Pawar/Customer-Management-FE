@@ -2,6 +2,7 @@ export class Customer {
 
     id?:any;
     name!: string | undefined;
+    password?:string;
     skills!: string | undefined;
     desc?: string;
     gender?: string;

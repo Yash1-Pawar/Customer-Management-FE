@@ -1,30 +1,70 @@
-<div class="container-fluid row">
-    <div class="d-flex">
-        <h1 class="m-auto"><b>Add Customer</b></h1>
-    </div>
-    <div class="mt-2 col-6 offset-3">
-        <form (ngSubmit)="onsubmit()">
-            <div class="mb-3">
-                <label for="id" class="form-label">Unique Id</label>
-                <input type="text" class="form-control" id="id" [(ngModel)]="customer.id" name="id">
+<div class="container mt-5 mb-3">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="p-3">
+        <div class="registrationtext">Registration Form</div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="userId" placeholder="User Id" formControlName="userId">
+            <label for="userId">User Id</label>
+            <div *ngIf="userId.touched && userId.status == 'INVALID' " class="error">
+                User ID must be 6-8 digits long & must only contain digits
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" name="name">
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+            <label for="name">Name</label>
+            <div *ngIf="name.touched && name.status == 'INVALID' " class="error">
+                Name can't be blank
             </div>
-            <div class="mb-3">
-                <label for="gender" class="form-label">Gender</label>
-                <input type="text" class="form-control" id="gender" [(ngModel)]="customer.gender" name="gender">
+        </div>
+        <div class="d-flex" style="color: white;"> Gender:
+            <div class="form-check ms-2 me-2">
+                <input class="form-check-input" type="radio" id="male" formControlName="gender" value="male"
+                    name="gender">
+                <label class="form-check-label" for="male">
+                    Male
+                </label>
             </div>
-            <div class="mb-3">
-                <label for="skills" class="form-label">Skills</label>
-                <input type="text" class="form-control" id="skills" [(ngModel)]="customer.skills" name="skills">
+            <div class="form-check me-1">
+                <input class="form-check-input" type="radio" id="female" formControlName="gender" value="female"
+                    name="gender">
+                <label class="form-check-label" for="female">
+                    Female
+                </label>
             </div>
-            <div class="mb-3">
-                <label for="desc" class="form-label">About yourself</label>
-                <textarea class="form-control" id="desc" rows="2.5" [(ngModel)]="customer.desc" name="desc"></textarea>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="skills" placeholder="Skills" formControlName="skills">
+            <label for="skills">Skills</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <textarea class="form-control" id="about" placeholder="About" formControlName="about"
+                style="height: 100px"></textarea>
+            <label for="about">About</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+            <label for="password">Password</label>
+            <div *ngIf="password.touched && password.status == 'INVALID' " class="error">
+                Password length must greater than eight & must contains atleast one UpperCase, one LowerCase, one digit,
+                one special character
             </div>
-            <button type="submit" class="btn btn-success col-6 offset-3 mb-2">Submit</button>
-        </form>
-    </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="cpassword" placeholder="cPassword"
+                formControlName="cpassword">
+            <label for="cpassword">Confirm Password</label>
+            <div *ngIf="cpassword.touched && cpassword.status == 'INVALID' " class="error">
+                Password doesnot match
+            </div>
+        </div>
+        <button type="submit" [disabled]="registerForm.status == 'INVALID'"
+            class="btn btn-success submit mb-2">Submit</button>
+    </form>
 </div>
+
+{{'id: ' + registerForm.controls['userId'].value}}
+{{'name: ' + registerForm.controls['name'].value}}
+{{'about: ' + registerForm.controls['about'].value}}
+{{'skills: ' + registerForm.controls['skills'].value}}
+{{'gender: ' + registerForm.controls['gender'].value}}
+{{'password: ' + registerForm.controls['password'].value}}
+{{'cp: ' + registerForm.controls['cpassword'].value}}

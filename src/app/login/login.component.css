@@ -21,6 +21,7 @@
 .logintext {
     color: yellow;
     text-align: center;
-    transform: scale(2.5);
+    font-size: 40px;
     padding: 10px 0px 15px 0px;
+    font-family: 'Roboto Slab', serif;
 }
