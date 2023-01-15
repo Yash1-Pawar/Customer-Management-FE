@@ -16,3 +16,10 @@ input[disabled]{
     background-color: rgb(162, 162, 162);
     color: rgb(77, 77, 77);
 }
+
+.alert{
+    width: 40vw;
+    z-index: 100 !important;
+    display: flex;
+    margin: auto;
+}

@@ -33,7 +33,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [SearchCustomerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

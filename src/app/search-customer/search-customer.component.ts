@@ -20,7 +20,7 @@ export class SearchCustomerComponent implements OnInit {
   getAllCustomers() {
     this.service.getAllCustomers().subscribe((data: Customer[]) => {
       data.forEach((e: Customer) => {
-        if (e.name?.toLocaleLowerCase().includes(this.name.toLocaleLowerCase())) {
+        if (e.name?.toLowerCase().includes(this.name.toLowerCase())) {
           this.customers.push(new Customer(e.id, e.name, e.skills, e.desc, e.gender));
         }
       });

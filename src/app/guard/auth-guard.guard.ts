@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuardGuard implements CanActivate {
 
+  isLoggedIn?:boolean;
+
   canActivate(): boolean {
+    this.isLoggedIn = localStorage.getItem('token') == null ? false : true;
     return localStorage.getItem('token') == null ? false : true;
   }
   

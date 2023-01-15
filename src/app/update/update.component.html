@@ -4,6 +4,15 @@
     </div>
     <div class="mt-2 col-6 offset-3">
         <form (ngSubmit)="onsubmit()">
+            <div id="liveAlertPlaceholder">
+                <div *ngIf="showAlert">
+                    <div class="alert alert-{{type}} alert-dismissible" role="alert">
+                        <div>{{message}}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            (click)="alertDismiss()"></button>
+                    </div>
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="id" class="form-label">Unique Id</label>
                 <input type="text" class="form-control" id="id" [(ngModel)]="customer.id" name="id" disabled>

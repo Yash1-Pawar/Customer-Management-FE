@@ -32,12 +32,36 @@ export class UpdateComponent implements OnInit {
 
   onsubmit() {
     try {
-      this.custService.updateCustomer(this.customer).subscribe((res: string) => {
-        this.router.navigate(["/customers"]);
+      this.custService.updateCustomer(this.customer).subscribe({
+        next: (res: string) => {
+          this.router.navigate(["/customers"]);
+        },
+        error: (error) => {
+          if (error.status == 403) { this.alertTrigger('You do not have permission to update user!' ,'danger'); }
+        }
       });
     } catch (error) {
       this.router.navigate(["/customers"]);
       console.log(error);
     }
   }
+
+  message!: string;
+  type!: string;
+  showAlert: boolean = false;
+
+  alert = (message: string, type: string) => {
+    this.message = message;
+    this.type = type;
+    this.showAlert = true;
+  }
+
+  alertTrigger(message:string, type: string) {
+    this.alert(message, type)
+  }
+
+  alertDismiss() {
+    this.showAlert = false;
+  }
+
 }

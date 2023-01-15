@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -10,16 +10,22 @@ export class NavigationComponent implements OnInit {
 
   title = 'Customer-Management';
   search?: any = "";
+  loggedin: boolean = localStorage.getItem('token') == null ? false : true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.isLoggedIn;
   }
   ngOnInit(): void {
+    this.isLoggedIn;
+  }
+
+  reLoad() {
+    this.router.navigate([this.router.url])
   }
 
   searchCustomer() {
     console.log("search clicked")
-    this.router.navigate(["/searchCustomer", this.search])
-    .then(page => { window.location.reload(); })
+    this.router.navigate(["/searchCustomer", this.search]);
   }
 
   onButtonClick() {
@@ -29,4 +35,21 @@ export class NavigationComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/searchCustomer'], { queryParams: { index: 1 } });
   }
+
+  isLoggedIn() {
+    this.loggedin = localStorage.getItem('token') == null ? false : true;
+  }
+
+  logout() {
+    if (confirm('Do you want to Logout?')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      this.loggedin = false;
+    }
+  }
+
+  get UserId() {
+    return localStorage.getItem('userId');
+  }
+
 }
