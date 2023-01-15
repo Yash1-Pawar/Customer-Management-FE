@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../model/Cutomer';
@@ -30,7 +29,7 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  onsubmit() {
+  onSubmit() {
     try {
       this.custService.updateCustomer(this.customer).subscribe({
         next: (res: string) => {
@@ -63,5 +62,6 @@ export class UpdateComponent implements OnInit {
   alertDismiss() {
     this.showAlert = false;
   }
+
 
 }

@@ -1,14 +1,8 @@
 .container {
-    background-color: #1d2038;
+    background-color: white;
     width: 40vw;
     border-radius: 10px;
-}
-
-.submit{
-    height: 50px;
-    width: 150px;
-    border-radius: 8px;
-    translate: 165px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%), 0 8px 16px rgb(0 0 0 / 20%);
 }
 
 .error{
@@ -19,7 +13,7 @@
 }
 
 .logintext {
-    color: yellow;
+    color: blueviolet;
     text-align: center;
     font-size: 40px;
     padding: 10px 0px 15px 0px;

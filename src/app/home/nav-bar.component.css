@@ -14,5 +14,6 @@
     font-size: 4em;
     font-weight: bold;
     font-style: italic;
-    text-decoration: underline yellowgreen;
+    /* The rgba() function is used to set the color of an element using Red, Green, Blue, and Alpha (transparency) values. In this case, var(--bd-violet-rgb) is a CSS variable that contains the RGB values for the violet color. The 1 at the end is the alpha value, which sets the transparency of the color to fully opaque (a value of 1). */
+    text-decoration: underline rgba(var(--bd-violet-rgb), 1);
 }

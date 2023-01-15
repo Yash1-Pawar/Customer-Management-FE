@@ -1,15 +1,8 @@
 .container {
-    background-color: #1d2038;
+    background-color: white;
     width: 50vw;
     border-radius: 10px;
-    padding: 0px 40px 0px 40px;
-}
-
-.submit{
-    height: 50px;
-    width: 180px;
-    border-radius: 8px;
-    translate: 170px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 
 .error{
@@ -20,9 +13,9 @@
 }
 
 .registrationtext {
-    color: yellow;
+    color: blueviolet;
     text-align: center;
+    font-size: 30px;
     padding: 10px 0px 15px 0px;
-    font-size: 50px;
     font-family: 'Roboto Slab', serif;
 }

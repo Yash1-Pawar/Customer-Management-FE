@@ -9,10 +9,14 @@
             <div class="card-body d-flex flex-column justify-content-around">
                 <h5 class="card-title">{{cust.name}}</h5>
                 <p class="card-text">{{cust.skills}}</p>
-                <p class="card-text">{{cust.desc}}</p>
-                <button class="btn btn-secondary mt-2" (click)="onViewClick(cust)">View Customer</button>
-                <button class="btn btn-primary mt-2" (click)="onEditClick(cust)">Edit</button>
-                <button class="btn btn-danger mt-2" (click)="delete(cust)">Delete</button>
+                <p class="card-text text-truncate">{{cust.desc}}</p>
+            </div>
+            <div class="card-body d-flex justify-content-end">
+                <button class="btn btn-secondary mt-2 col-2 me-1"
+                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="view customer"
+                (click)="onViewClick(cust)"><i class="bi bi-eye-fill"></i></button>
+                <button class="btn btn-primary mt-2 col-2 me-1" (click)="onEditClick(cust)"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger mt-2 col-2" (click)="delete(cust)"><i class="bi bi-trash"></i></button>
             </div>
         </div>
     </div>

@@ -23,3 +23,25 @@ input[disabled]{
     display: flex;
     margin: auto;
 }
+
+.container {
+    background-color: white;
+    width: 50vw;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+
+.error{
+    color: red;
+    border-radius: 5px;
+    margin: 2px;
+    padding-left: 2px;
+}
+
+.updatetext {
+    color: blueviolet;
+    text-align: center;
+    font-size: 30px;
+    padding: 10px 0px 15px 0px;
+    font-family: 'Roboto Slab', serif;
+}

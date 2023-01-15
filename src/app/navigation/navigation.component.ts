@@ -26,6 +26,7 @@ export class NavigationComponent implements OnInit {
   searchCustomer() {
     console.log("search clicked")
     this.router.navigate(["/searchCustomer", this.search]);
+    this.search ="";
   }
 
   onButtonClick() {

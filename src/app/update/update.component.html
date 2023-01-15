@@ -1,40 +1,53 @@
-<div class="container-fluid row">
-    <div class="d-flex">
-        <h1 class="m-auto"><b>Update Customer</b></h1>
-    </div>
-    <div class="mt-2 col-6 offset-3">
-        <form (ngSubmit)="onsubmit()">
-            <div id="liveAlertPlaceholder">
-                <div *ngIf="showAlert">
-                    <div class="alert alert-{{type}} alert-dismissible" role="alert">
-                        <div>{{message}}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                            (click)="alertDismiss()"></button>
-                    </div>
+<div class="container mt-5 mb-5">
+    <form (ngSubmit)="onSubmit()" class="p-3">
+        <div class="updatetext">Update Customer</div>
+        <div id="liveAlertPlaceholder">
+            <div *ngIf="showAlert">
+                <div class="alert alert-{{type}} alert-dismissible" role="alert">
+                    <div>{{message}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                        (click)="alertDismiss()"></button>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="id" class="form-label">Unique Id</label>
-                <input type="text" class="form-control" id="id" [(ngModel)]="customer.id" name="id" disabled>
-                <p class="text-warning">Unique Id cannot be changed</p>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" placeholder="Name" name="name">
+            <label for="name">Name</label>
+        </div>
+        <div class="d-flex"> Gender:
+            <div class="form-check ms-2 me-2">
+                <input class="form-check-input" type="radio" [(ngModel)]="customer.gender" id="male" name="gender" value="male" name="gender">
+                <label class="form-check-label" for="male">
+                    Male
+                </label>
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" name="name">
+            <div class="form-check me-1">
+                <input class="form-check-input" type="radio" id="female" [(ngModel)]="customer.gender" name="gender" value="female" name="gender">
+                <label class="form-check-label" for="female">
+                    Female
+                </label>
             </div>
-            <div class="mb-3">
-                <label for="gender" class="form-label">Gender</label>
-                <input type="text" class="form-control" id="gender" [(ngModel)]="customer.gender" name="gender">
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="skills" [(ngModel)]="customer.skills" placeholder="Skills" name="skills">
+            <label for="skills">Skills</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <textarea class="form-control" id="about" [(ngModel)]="customer.desc" placeholder="About" name="desc" style="height: 70px"></textarea>
+            <label for="about">About</label>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="">
+                <button type="submit" class="btn btn-success mb-2">Submit</button>
             </div>
-            <div class="mb-3">
-                <label for="skills" class="form-label">Skills</label>
-                <input type="text" class="form-control" id="skills" [(ngModel)]="customer.skills" name="skills">
-            </div>
-            <div class="mb-3">
-                <label for="desc" class="form-label">About yourself</label>
-                <textarea class="form-control" id="desc" rows="2.5" [(ngModel)]="customer.desc" name="desc"></textarea>
-            </div>
-            <button type="submit" class="btn col-6 offset-3 mb-2">Submit</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
+
+<!-- {{'id: ' + registerForm.controls['userId'].value}}
+{{'name: ' + registerForm.controls['name'].value}}
+{{'about: ' + registerForm.controls['about'].value}}
+{{'skills: ' + registerForm.controls['skills'].value}}
+{{'gender: ' + registerForm.controls['gender'].value}}
+{{'password: ' + registerForm.controls['password'].value}}
+{{'cp: ' + registerForm.controls['cpassword'].value}} -->
