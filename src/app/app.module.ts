@@ -13,6 +13,8 @@ import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { SearchCustomerComponent } from './search-customer/search-customer.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
+import { FollowersComponent } from './view-customer/followers/followers.component';
+import { FollowingComponent } from './view-customer/following/following.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { LoginComponent } from './login/login.component';
     ViewCustomerComponent,
     SearchCustomerComponent,
     NavigationComponent,
-    LoginComponent
+    LoginComponent,
+    FollowersComponent,
+    FollowingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="table table-striped mt-1">
+        <thead>
+            <tr>
+                <th scope="col">Customer Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Skills</th>
+                <th scope="col">Gender</th>
+                <th scope="col">View</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="customer.customers.length > 0; else noFriends">
+            <tr *ngFor="let f of customer.customers">
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.name}}</td>
+                <td>{{f.skills}}</td>
+                <td>{{f.gender}}</td>
+                <td><button type="button" class="btn btn-outline-warning" (click)="viewFriend(f.id)">View
+                        Friend</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #noFriends>
+    <div>No Friends...</div>
+</ng-template>

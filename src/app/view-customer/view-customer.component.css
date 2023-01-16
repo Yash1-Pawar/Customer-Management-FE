@@ -5,3 +5,27 @@ p{
 .info{
     width: 30vw;
 }
+
+.nav-link.active{
+    color: black;
+    background-color: unset;
+    border-top: unset;
+    border-right: unset;
+    border-left: unset;
+    border-bottom-color: #ff0089;
+    border-bottom-width: 2px;
+}
+
+.nav-link{
+    border-top: unset;
+    border-right: unset;
+    border-left: unset;
+    color: gray;
+}
+
+.following {
+    background-color: white;
+    padding: 1rem !important;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%), 0 8px 16px rgb(0 0 0 / 20%);
+}

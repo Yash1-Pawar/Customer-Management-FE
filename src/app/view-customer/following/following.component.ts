@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Customer } from '../model/Cutomer';
-import { ServiceService } from '../service.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Customer } from 'src/app/model/Cutomer';
+import { ServiceService } from 'src/app/service.service';
 
 @Component({
-  selector: 'app-view-customer',
-  templateUrl: './view-customer.component.html',
-  styleUrls: ['./view-customer.component.css']
+  selector: 'app-following',
+  templateUrl: './following.component.html',
+  styleUrls: ['./following.component.css']
 })
-export class ViewCustomerComponent implements OnInit {
+export class FollowingComponent implements OnInit {
 
+  @Input()
   customer: Customer = new Customer;
-  id!: string;
-  tabSelected:string = 'following';
 
-  constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.id = this.activatedRoute.snapshot.params['id'];
+  @Output()
+  customerChange = new EventEmitter<Customer>();
+
+  id!: string;
+
+  constructor(private custService: ServiceService, private router: Router) {
+    this.customer.customers = [];
   }
 
   ngOnInit(): void {
+  }
+
+  getById() {
     this.custService.getCustomerById(this.id).subscribe({
       next: (res) => {
         console.log(res);
         this.customer = res;
+        this.customerChange.emit(this.customer);
         scrollTo(0, 0);
       }, complete: () => {
         this.customer.customers = [];
@@ -43,21 +51,9 @@ export class ViewCustomerComponent implements OnInit {
     });
   }
 
-  customerChangeFromChild(customer: Customer) {
-    this.customer = customer;
-  }
-
   viewFriend(id: string) {
     this.id = id;
-    this.ngOnInit();
-  }
-
-  onEditClick(customer: Customer) {
-    this.router.navigate(["/update", customer.id]);
-  }
-
-  childTab(tab:string) {
-    this.tabSelected = tab;
+    this.getById();
   }
 
 }
