@@ -4,6 +4,7 @@ import { Customer } from '../model/Cutomer';
 import { ServiceService } from '../service.service';
 
 import * as bootstrap from 'bootstrap';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
   selector: 'app-customers',
@@ -14,7 +15,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
 
   customers: Customer[] = [new Customer("101", "Yash Pawar", "Java, SpringBoot, Angular", "Lorem ipsum dolor sit, amet consectetur adipisicing elit.", "male")];
 
-  constructor(private service: ServiceService, private router: Router) {
+  constructor(private service: ServiceService, private router: Router, private navigation: NavigationComponent) {
   }
 
   ngAfterViewInit() {
@@ -23,11 +24,23 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   }
 
   getAllCustomers() {
-    this.service.getAllCustomers().subscribe((data: Customer[]) => {
-      data.forEach((e: Customer) => {
-        this.customers.push(new Customer(e.id, e.name, e.skills, e.desc, e.gender));
-      });
-    });
+    this.service.getAllCustomers().subscribe(
+      {
+        next: (data: Customer[]) => {
+          data.forEach((e: Customer) => {
+            this.customers.push(new Customer(e.id, e.name, e.skills, e.desc, e.gender));
+          });
+        },
+        error: (err) => {
+          if (err.status == 403) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            this.navigation.loggedin = false;
+            this.router.navigate(['/login']);
+          }
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -37,9 +50,21 @@ export class CustomersComponent implements OnInit, AfterViewInit {
 
   delete(customer: Customer) {
     if (confirm("Do you want to delete?")) {
-      this.service.deleteCustomer(customer.id).subscribe(() => {
-        this.ngOnInit();
-      });
+      this.service.deleteCustomer(customer.id).subscribe(
+        {
+          next: () => {
+            this.ngOnInit();
+          },
+          error: (err) => {
+            if (err.status == 403) {
+              localStorage.removeItem('token');
+              localStorage.removeItem('userId');
+              this.navigation.loggedin = false;
+              this.router.navigate(['/login']);
+            }
+          }
+        }
+      );
     }
   }
 

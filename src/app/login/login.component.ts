@@ -32,23 +32,29 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm);
     this.loginDTO.id = this.userId?.value;
     this.loginDTO.password = this.password?.value;
-    this.service.login(this.loginDTO).subscribe({
-      next: (response) => {
-        console.log(response.token);
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('userId', this.userId.value)
-        this.navigationComponent.loggedin = true;
-      }, complete: () => {
-        this.router.navigate(['/home'])
+    this.service.login(this.loginDTO).subscribe(
+      {
+        next: (response) => {
+          console.log(response.token);
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', this.userId.value)
+          this.navigationComponent.loggedin = true;
+        },
+        complete: () => {
+          this.router.navigate(['/home'])
+        },
+        error: (error) => {
+          console.log(error);
+        }
       }
-    });
+    );
   }
 
-  all() {
-    this.service.getAllCustomers().subscribe((data) => {
-      console.log(data);
-    });
-  }
+  // all() {
+  //   this.service.getAllCustomers().subscribe((data) => {
+  //     console.log(data);
+  //   });
+  // }
 
   get userId(): FormControl {
     return this.loginForm.get("userId") as FormControl;

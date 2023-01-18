@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../model/Cutomer';
+import { NavigationComponent } from '../navigation/navigation.component';
 import { ServiceService } from '../service.service';
 
 @Component({
@@ -15,30 +16,44 @@ export class UpdateComponent implements OnInit {
   customer: Customer = new Customer;
   id!: string;
 
-  constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute, private navigation: NavigationComponent) {
   }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.custService.getCustomerById(this.id).subscribe((res) => {
-      this.customer.id = res.id;
-      this.customer.name = res.name;
-      this.customer.gender = res.gender;
-      this.customer.skills = res.skills;
-      this.customer.desc = res.desc;
-    });
+    this.custService.getCustomerById(this.id).subscribe(
+      {
+        next: (res) => {
+          this.customer.id = res.id;
+          this.customer.name = res.name;
+          this.customer.gender = res.gender;
+          this.customer.skills = res.skills;
+          this.customer.desc = res.desc;
+        },
+        error: (err) => {
+          if (err.status == 403) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            this.navigation.loggedin = false;
+            this.router.navigate(['/login']);
+          }
+        }
+      }
+    );
   }
 
   onSubmit() {
     try {
-      this.custService.updateCustomer(this.customer).subscribe({
-        next: (res: string) => {
-          this.router.navigate(["/customers"]);
-        },
-        error: (error) => {
-          if (error.status == 403) { this.alertTrigger('You do not have permission to update user!' ,'danger'); }
+      this.custService.updateCustomer(this.customer).subscribe(
+        {
+          next: (res: string) => {
+            this.router.navigate(["/customers"]);
+          },
+          error: (error) => {
+            if (error.status == 403) { this.alertTrigger('You do not have permission to update user!', 'danger'); }
+          }
         }
-      });
+      );
     } catch (error) {
       this.router.navigate(["/customers"]);
       console.log(error);
@@ -55,7 +70,7 @@ export class UpdateComponent implements OnInit {
     this.showAlert = true;
   }
 
-  alertTrigger(message:string, type: string) {
+  alertTrigger(message: string, type: string) {
     this.alert(message, type)
   }
 
