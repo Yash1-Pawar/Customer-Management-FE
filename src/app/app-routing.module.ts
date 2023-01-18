@@ -8,6 +8,8 @@ import { NavBarComponent } from './home/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { SearchCustomerComponent } from './search-customer/search-customer.component';
 import { UpdateComponent } from './update/update.component';
+import { FollowersComponent } from './view-customer/followers/followers.component';
+import { FollowingComponent } from './view-customer/following/following.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 
 const routes: Routes = [
@@ -16,10 +18,15 @@ const routes: Routes = [
   { path: "register", component: AddCustComponent },
   { path: "login", component: LoginComponent },
   { path: "update/:id", component: UpdateComponent },
-  { path: "viewCustomer/:id", component: ViewCustomerComponent },
+  { path: "viewCustomer/:id", component: ViewCustomerComponent,
+    children: [
+      {path: "following", component: FollowingComponent},
+      {path: "followers", component: FollowersComponent}
+    ]
+  },
   { path: "searchCustomer/:name", component: SearchCustomerComponent },
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "**", redirectTo: "home", pathMatch: "full" }
+  // { path: "", redirectTo: "home", pathMatch: "full" },
+  // { path: "**", redirectTo: "home", pathMatch: "full" }
 ];
 
 @NgModule({

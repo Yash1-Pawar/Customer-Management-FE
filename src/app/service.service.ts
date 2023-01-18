@@ -19,6 +19,7 @@ export class ServiceService {
     return this.httpClient.post(this.baseUrlForAuth + "getToken", login);
   }
 
+  // register
   addCustomer(customer: Customer): Observable<any> {
     console.log(customer)
     return this.httpClient.post(this.baseUrlForAuth + "registerUser", customer);
