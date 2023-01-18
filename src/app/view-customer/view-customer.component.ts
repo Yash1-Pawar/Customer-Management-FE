@@ -37,11 +37,16 @@ export class ViewCustomerComponent implements OnInit {
               })
             }
           })
-          this.customer.customers.sort((a, b) => {
-            if (a.id > b.id) return 1;
-            else if (a.id < b.id) return -1;
-            else return 0;
-          });
+          this.customer.followersCustomers = [];
+          console.log('Followers: ' + this.customer.followers);
+          this.customer.followers.forEach(cust => {
+            if (cust != "" && cust != null) {
+              this.custService.getCustomerById(cust).subscribe((result) => {
+                this.customer.followersCustomers.push(result);
+              })
+            }
+          })
+          this.sortCustomers();
         },
         error: (err) => {
           if (err.status == 403) {
@@ -55,7 +60,16 @@ export class ViewCustomerComponent implements OnInit {
     );
   }
 
+  sortCustomers() {
+    this.customer.customers.sort((a, b) => {
+      if (a.id > b.id) return 1;
+      else if (a.id < b.id) return -1;
+      else return 0;
+    });
+  }
+
   customerChangeFromChild(customer: Customer) {
+    console.log('EventEmitter: ' + JSON.stringify(customer))
     this.customer = customer;
   }
 

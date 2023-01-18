@@ -32,7 +32,7 @@
             <app-following (customerChange)="customerChangeFromChild($event)" [customer]="customer"></app-following>
         </div>
         <div *ngIf="tabSelected == 'followers'">
-            <app-followers></app-followers>
+            <app-followers (customerChange)="customerChangeFromChild($event)" [customer]="customer"></app-followers>
         </div>
     </div>    
 </div>

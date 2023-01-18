@@ -7,7 +7,9 @@ export class Customer {
     desc?: string;
     gender?: string;
     customers: Customer[] = [];
+    followersCustomers: Customer[] = [];
     friends: string[] = [];
+    followers: string[] = [];
     
     constructor(id?:any, name?: string, skills?: string, desc?: string, gender?: string) {
         this.id=id;
