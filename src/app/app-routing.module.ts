@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCustComponent } from './add-cust/add-cust.component';
 import { AppComponent } from './app.component';
 import { CustomersComponent } from './customers/customers.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthGuardGuard } from './guard/auth-guard.guard';
 import { NavBarComponent } from './home/nav-bar.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SearchCustomerComponent } from './search-customer/search-customer.component';
 import { UpdateComponent } from './update/update.component';
 import { FollowersComponent } from './view-customer/followers/followers.component';
@@ -25,8 +27,10 @@ const routes: Routes = [
     ]
   },
   { path: "searchCustomer/:name", component: SearchCustomerComponent },
-  // { path: "", redirectTo: "home", pathMatch: "full" },
-  // { path: "**", redirectTo: "home", pathMatch: "full" }
+  { path: "changePassword", component: ResetPasswordComponent },
+  { path: "forgotPassword", component: ForgotPasswordComponent },
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "**", redirectTo: "home", pathMatch: "full" }
 ];
 
 @NgModule({

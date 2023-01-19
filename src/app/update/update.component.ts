@@ -46,11 +46,15 @@ export class UpdateComponent implements OnInit {
     try {
       this.custService.updateCustomer(this.customer).subscribe(
         {
-          next: (res: string) => {
+          next: (res) => {
             this.router.navigate(["/customers"]);
+            console.log(res)
           },
           error: (error) => {
-            if (error.status == 403) { this.alertTrigger('You do not have permission to update user!', 'danger'); }
+            if (error.status == 403) {
+              this.alertTrigger('You do not have permission to update user!', 'danger');
+            }
+            console.error(error)
           }
         }
       );

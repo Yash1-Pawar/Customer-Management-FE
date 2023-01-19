@@ -12,14 +12,13 @@
             <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
             <label for="password">Password</label>
             <div *ngIf="loginForm.touched && password.status == 'INVALID' " class="error">
-                Password length must greater than eight & must contains atleast one UpperCase, one LowerCase, one digit,
-                one special character
+                Password is Invalid
             </div>
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <div>
                 <button type="submit" [disabled]="loginForm.status == 'INVALID'"
-                    class="btn btn-success submit mb-1">Submit</button>
+                    class="btn btn-success submit mb-1">Login</button>
             </div>
         </div>
         <div class="d-flex justify-content-between">
@@ -28,7 +27,7 @@
             <hr style="width: 45%;">
         </div>
         <div class="mb-2 d-flex justify-content-center align-items-center">
-            <a class="me-3" routerLink="/register"> Forgotten account?</a>
+            <a class="me-3" routerLink="/forgotPassword"> Forgotten Password?</a>
             <a routerLink="/register"> Sign up for Customer App</a>
         </div>
     </form>

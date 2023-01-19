@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from './model/Cutomer';
 import { Login } from './model/Login';
+import { ResetPassword } from './model/ResetPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +47,12 @@ export class ServiceService {
   }
 
   updateCustomer(customer: Customer): Observable<any> {
-    console.log('edit: ' + JSON.stringify(customer))
-    let options = {
+    let options =
+    {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        responseType: 'text'
-      })
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }),
+      responseType: 'text' as 'json'
     }
     return this.httpClient.put(this.baseUrl + "updateCustomer/" + customer.id, customer, options);
   }
@@ -64,4 +65,24 @@ export class ServiceService {
     }
     return this.httpClient.get<Customer>(this.baseUrl + "getCustomer/" + id, options);
   }
+
+  changePassword(id: string, resetDTO: ResetPassword): Observable<any> {
+    let options =
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }),
+      responseType: 'text' as 'json'
+    }
+    return this.httpClient.put(this.baseUrl + "changePassword/" + id, resetDTO, options);
+  }
+
+  forgotPassword(id: string, newPassword: string): Observable<any> {
+    let options =
+    {
+      responseType: 'text' as 'json'
+    }
+    return this.httpClient.put(this.baseUrlForAuth + "resetPassword/" + id, newPassword, options);
+  }
+
 }
