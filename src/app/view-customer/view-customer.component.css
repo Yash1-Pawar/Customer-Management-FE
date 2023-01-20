@@ -6,6 +6,22 @@ p{
     width: 30vw;
 }
 
+/* .dp:hover {
+    animation: dpAnimate 1s;
+}
+
+@keyframes dpAnimate {
+    0% {
+        translate: 0%;
+    }
+    50% {
+        translate: -70%;
+    }
+    100% {
+        translate: 0%;
+    }
+} */
+
 .nav-link.active{
     color: black;
     background-color: unset;

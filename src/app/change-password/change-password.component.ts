@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Validator } from '../add-cust/PasswordValidator';
 import { ResetPassword } from '../model/ResetPassword';
 import { ServiceService } from '../service.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.css']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit {
 
+  id?:string;
+  disable:boolean = true;
+ 
   resetDTO: ResetPassword = new ResetPassword;
 
-  constructor(private custService: ServiceService, private router: Router) { }
+  constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute) { 
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.userId.setValue(this.id);
+    this.userId.disable()
+  }
 
   ngOnInit(): void {
   }
@@ -64,5 +71,6 @@ export class ResetPasswordComponent implements OnInit {
   get cPassword(): FormControl {
     return this.resetForm.get('cPassword') as FormControl;
   }
+
 
 }

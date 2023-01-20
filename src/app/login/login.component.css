@@ -15,7 +15,17 @@
 .logintext {
     color: blueviolet;
     text-align: center;
-    font-size: 40px;
+    font-size: 2rem;
     padding: 10px 0px 15px 0px;
     font-family: 'Roboto Slab', serif;
+}
+
+.lockdiv {
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.lock {
+    width: 3rem;
 }

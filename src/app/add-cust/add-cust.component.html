@@ -1,6 +1,10 @@
 <div class="container mt-5 mb-5">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="p-3">
-        <div class="registrationtext">Register to Customer App</div>
+        <div class="lockdiv d-flex flex-column">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSNpjfCk957rg_kcDFcGu-jjPuJ6ZEUIL_4Q&usqp=CAU"
+                alt="img" class="lock">
+            <div class="registrationtext">Register to Customer App</div>
+        </div>
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="userId" placeholder="User Id" formControlName="userId">
             <label for="userId">User Id</label>
@@ -62,8 +66,8 @@
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <div class="">
-                <button type="submit" [disabled]="registerForm.status == 'INVALID'"
-                class="btn btn-success mb-2">Sign in</button>
+                <button type="submit" [disabled]="registerForm.status == 'INVALID'" class="btn btn-success mb-2">Sign
+                    in</button>
             </div>
         </div>
         <div class="d-flex justify-content-between">
@@ -72,7 +76,8 @@
             <hr style="width: 45%;">
         </div>
         <div>
-            <a class="mb-2 d-flex justify-content-center align-items-center" routerLink="/login"> Already have an account?</a>
+            <a class="mb-2 d-flex justify-content-center align-items-center" routerLink="/login"> Already have an
+                account?</a>
         </div>
     </form>
 </div>

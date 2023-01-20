@@ -1,5 +1,5 @@
-<div class="d-flex m-2 justify-content-center">
-    <div class="card overflow-auto me-5" style="width: 18rem;">
+<div class="d-flex m-2 mb-4 justify-content-center">
+    <div class="dp me-5" style="width: 18rem;">
         <div [ngSwitch]="customer.gender" class="m-auto">
             <img *ngSwitchCase="'male'" src="../../assets/male.png" class="card-img-top mt-1" alt="img">
             <img *ngSwitchCase="'female'" src="../../assets/female.png" class="card-img-top mt-1" alt="img">
@@ -7,8 +7,12 @@
         </div>
     </div>
     <div class="info d-flex flex-column flex-wrap justify-content-center">
-        <button type="button" class="btn btn-warning mb-3 align-self-start"
-            (click)="onEditClick(customer)">Edit</button>
+        <div class="mb-3">
+            <button type="button" class="edit btn btn-secondary me-2"
+                (click)="onEditClick(customer)">Edit</button>
+            <button type="button" class="cp btn btn-outline-warning"
+                [routerLink]="['/changePassword', customer.id]" >Change Password</button>
+        </div>
         <p><b>User Id: </b> {{customer.id}}</p>
         <p><b>Name: </b> {{customer.name}}</p>
         <p><b>Skills: </b>{{customer.skills}}</p>
@@ -34,7 +38,7 @@
         <div *ngIf="tabSelected == 'followers'">
             <app-followers (customerChange)="customerChangeFromChild($event)" [customer]="customer"></app-followers>
         </div>
-    </div>    
+    </div>
 </div>
 
 <router-outlet></router-outlet>

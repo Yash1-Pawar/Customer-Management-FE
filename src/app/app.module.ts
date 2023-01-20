@@ -15,8 +15,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { FollowersComponent } from './view-customer/followers/followers.component';
 import { FollowingComponent } from './view-customer/following/following.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +31,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     LoginComponent,
     FollowersComponent,
     FollowingComponent,
-    ResetPasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
