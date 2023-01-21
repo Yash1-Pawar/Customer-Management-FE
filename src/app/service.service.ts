@@ -85,4 +85,26 @@ export class ServiceService {
     return this.httpClient.put(this.baseUrlForAuth + "resetPassword/" + id, newPassword, options);
   }
 
+  follow(id: string, followingId: string): Observable<any> {
+    let options =
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }),
+      responseType: 'text' as 'json'
+    }
+    return this.httpClient.put(this.baseUrl + "follow/" + id, followingId, options);
+  }
+
+  unfollow(id: string, followerId: string): Observable<any> {
+    let options =
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }),
+      responseType: 'text' as 'json'
+    }
+    return this.httpClient.put(this.baseUrl + "unfollow/" + id, followerId, options);
+  }
+
 }

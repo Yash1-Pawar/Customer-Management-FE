@@ -1,22 +1,33 @@
-<div class="container">
+<div class="table-responsive">
     <table class="table table-striped mt-1">
         <thead>
             <tr>
-                <th scope="col">Customer Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Skills</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Action</th>
+                <th scope="col" id="userId">Customer Id</th>
+                <th scope="col" id="name">Name</th>
+                <th scope="col" id="skills">Skills</th>
+                <th scope="col" id="gender">Gender</th>
+                <th scope="col" id="actions">Actions</th>
             </tr>
         </thead>
-        <tbody *ngIf="customer.customers.length > 0; else noFriends">
+        <tbody class="table-group-divider" *ngIf="customer.customers.length > 0; else noFriends">
             <tr *ngFor="let f of customer.customers">
                 <th scope="row">{{f.id}}</th>
                 <td>{{f.name}}</td>
                 <td>{{f.skills}}</td>
                 <td>{{f.gender}}</td>
-                <td><button type="button" class="btn btn-outline-warning" (click)="viewFriend(f.id)">View
-                        Friend</button></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info" (click)="viewFriend(f.id)">View
+                        </button>
+                        <button
+                            *ngIf="!loggedInUser.friends.includes(f.id) && loggedInUser.id != f.id; else followingbtn"
+                            type="button" class="btn btn-success" (click)="follow(f.id)">Follow</button>
+                        <ng-template #followingbtn>
+                            <button *ngIf="loggedInUser.id != f.id" type="button"
+                                class="btn btn-success" (click)="unfollow(f.id)">Following</button>
+                        </ng-template>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

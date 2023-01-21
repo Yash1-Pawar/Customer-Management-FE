@@ -18,9 +18,11 @@ export class FollowersComponent implements OnInit {
   customerChange = new EventEmitter<Customer>();
 
   id!: string;
+  loggedInUser: Customer = new Customer;
 
   constructor(private custService: ServiceService, private router: Router, private navigation: NavigationComponent) {
     this.customer.followersCustomers = [];
+    this.setLoggedInUser();
   }
 
   ngOnInit(): void {
@@ -79,6 +81,50 @@ export class FollowersComponent implements OnInit {
   viewFriend(id: string) {
     this.id = id;
     this.getById();
+  }
+
+  setLoggedInUser() {
+    let userId = localStorage.getItem('userId');
+    if(userId != null) {
+      this.custService.getCustomerById(userId).subscribe(
+        {
+          next: (loggedInUser) => {
+            this.loggedInUser = loggedInUser;
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        }
+      )
+    };
+  }
+
+  follow(followingId: string) {
+    this.custService.follow(this.loggedInUser.id, followingId).subscribe(
+      {
+        next: (response)=> {
+          console.log(response);
+          this.setLoggedInUser();
+        },
+        error: (err) => {
+          console.error(err)
+        }
+      }
+    );
+  }
+
+  unfollow(followingId: string) {
+    this.custService.unfollow(this.loggedInUser.id, followingId).subscribe(
+      {
+        next: (response)=> {
+          console.log(response);
+          this.setLoggedInUser();
+        },
+        error: (err) => {
+          console.error(err)
+        }
+      }
+    );
   }
 
 }

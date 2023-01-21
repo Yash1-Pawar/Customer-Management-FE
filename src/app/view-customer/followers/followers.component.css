@@ -1,0 +1,19 @@
+.table-group-divider {
+    border-top: 1.4px solid currentcolor;
+}
+
+#userId, #gender {
+    width: 10%;
+}
+
+#name {
+    width: 15%;
+}
+
+#skills {
+    width: 30%;
+}
+
+#actions {
+    width: 30%;
+}
