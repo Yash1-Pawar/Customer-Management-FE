@@ -129,4 +129,20 @@ export class FollowersComponent implements OnInit {
     }
   }
 
+  removeFollower(followingId: string) {
+    if (confirm("Do you want to remove " + followingId + " ?")) {
+      this.custService.removeFollower(this.loggedInUser.id, followingId).subscribe(
+        {
+          next: (response) => {
+            console.log(response);
+            this.setLoggedInUser();
+          },
+          error: (err) => {
+            console.error(err)
+          }
+        }
+      );
+    }
+  }
+
 }

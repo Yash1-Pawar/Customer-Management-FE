@@ -107,4 +107,15 @@ export class ServiceService {
     return this.httpClient.put(this.baseUrl + "unfollow/" + id, followerId, options);
   }
 
+  removeFollower(id: string, followerId: string): Observable<any> {
+    let options =
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }),
+      responseType: 'text' as 'json'
+    }
+    return this.httpClient.put(this.baseUrl + "removeFollower/" + id, followerId, options);
+  }
+
 }

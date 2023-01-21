@@ -20,7 +20,7 @@
                         <button type="button" class="btn btn-info" (click)="viewFriend(f.id)">View
                         </button>
                         <button *ngIf="loggedInUser.id == customer.id" type="button" class="btn btn-danger"
-                            (click)="viewFriend(f.id)">Remove</button>
+                            (click)="removeFollower(f.id)">Remove</button>
                         <button
                             *ngIf="!loggedInUser.friends.includes(f.id) && loggedInUser.id != f.id; else followingbtn"
                             type="button" class="btn btn-success" (click)="follow(f.id)">Follow</button>
