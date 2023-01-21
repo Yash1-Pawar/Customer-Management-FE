@@ -14,8 +14,12 @@
         </div>
         <ng-template #otherUser>
             <div>
-                <button type="button" class="edit btn btn-success mb-1 me-1">Follow</button>
-                <button type="button" class="cp btn btn-danger mb-1">Unfollow</button>
+                <button *ngIf="!loggedInUser.friends.includes(customer.id) && loggedInUser.id != customer.id; else followingbtn"
+                    type="button" class="btn btn-success" (click)="follow(customer.id)">Follow</button>
+                <ng-template #followingbtn>
+                    <button *ngIf="loggedInUser.id != customer.id" type="button" class="btn btn-danger"
+                        (click)="unfollow(customer.id)">Unfollow</button>
+                </ng-template>
             </div>
         </ng-template>
         <p><b>User Id: </b> {{customer.id}}</p>

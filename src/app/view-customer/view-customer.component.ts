@@ -15,9 +15,11 @@ export class ViewCustomerComponent implements OnInit {
   id!: string;
   tabSelected: string = 'following';
   loggedInUserId = localStorage.getItem('userId');
+  loggedInUser: Customer = new Customer;
 
   constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute, private navigation: NavigationComponent) {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.setLoggedInUser();
   }
 
   ngOnInit(): void {
@@ -85,6 +87,52 @@ export class ViewCustomerComponent implements OnInit {
 
   childTab(tab: string) {
     this.tabSelected = tab;
+  }
+
+  follow(followingId: string) {
+    this.custService.follow(this.loggedInUser.id, followingId).subscribe(
+      {
+        next: (response) => {
+          console.log(response);
+          this.setLoggedInUser();
+        },
+        error: (err) => {
+          console.error(err)
+        }
+      }
+    );
+  }
+
+  unfollow(followingId: string) {
+    if (confirm("Do you want to Unfollow?")) {
+      this.custService.unfollow(this.loggedInUser.id, followingId).subscribe(
+        {
+          next: (response) => {
+            console.log(response);
+            this.setLoggedInUser();
+          },
+          error: (err) => {
+            console.error(err)
+          }
+        }
+      );
+    }
+  }
+
+  setLoggedInUser() {
+    let userId = localStorage.getItem('userId');
+    if (userId != null) {
+      this.custService.getCustomerById(userId).subscribe(
+        {
+          next: (loggedInUser) => {
+            this.loggedInUser = loggedInUser;
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        }
+      )
+    };
   }
 
 }
