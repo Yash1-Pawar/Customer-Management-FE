@@ -14,6 +14,7 @@ export class ViewCustomerComponent implements OnInit {
   customer: Customer = new Customer;
   id!: string;
   tabSelected: string = 'following';
+  loggedInUserId = localStorage.getItem('userId');
 
   constructor(private custService: ServiceService, private router: Router, private activatedRoute: ActivatedRoute, private navigation: NavigationComponent) {
     this.id = this.activatedRoute.snapshot.params['id'];

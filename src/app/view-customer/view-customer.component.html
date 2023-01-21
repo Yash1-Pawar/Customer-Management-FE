@@ -7,12 +7,17 @@
         </div>
     </div>
     <div class="info d-flex flex-column flex-wrap justify-content-center">
-        <div class="mb-3">
-            <button type="button" class="edit btn btn-secondary me-2"
-                (click)="onEditClick(customer)">Edit</button>
-            <button type="button" class="cp btn btn-outline-warning"
-                [routerLink]="['/changePassword', customer.id]" >Change Password</button>
+        <div *ngIf="loggedInUserId == customer.id; else otherUser">
+            <button type="button" class="edit btn btn-secondary mb-1 me-1" (click)="onEditClick(customer)">Edit</button>
+            <button type="button" class="cp btn btn-warning mb-1" [routerLink]="['/changePassword', customer.id]">Change
+                Password</button>
         </div>
+        <ng-template #otherUser>
+            <div>
+                <button type="button" class="edit btn btn-success mb-1 me-1">Follow</button>
+                <button type="button" class="cp btn btn-danger mb-1">Unfollow</button>
+            </div>
+        </ng-template>
         <p><b>User Id: </b> {{customer.id}}</p>
         <p><b>Name: </b> {{customer.name}}</p>
         <p><b>Skills: </b>{{customer.skills}}</p>
