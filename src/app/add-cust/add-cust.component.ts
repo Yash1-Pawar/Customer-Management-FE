@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as bootstrap from 'bootstrap';
 import { Customer } from '../model/Cutomer';
 import { ServiceService } from '../service.service';
 import { Validator } from './PasswordValidator';
@@ -11,7 +12,11 @@ import { Validator } from './PasswordValidator';
   styleUrls: ['./add-cust.component.css']
 })
 export class AddCustComponent implements OnInit {
+
   customer: Customer = new Customer;
+
+  toastMessage?: string;
+  toastBgc?:string;
 
   constructor(private custService: ServiceService, private router: Router) {
   }
@@ -34,15 +39,42 @@ export class AddCustComponent implements OnInit {
   });
 
   onSubmit() {
-    this.customer.id=this.userId.value;
-    this.customer.name=this.name.value;
-    this.customer.gender=this.gender.value;
-    this.customer.skills=this.skills.value;
-    this.customer.desc=this.about.value;
-    this.customer.password=this.password.value;
-    this.custService.addCustomer(this.customer).subscribe((response) => {
-      this.router.navigate(["/login"]);
-    });
+    this.customer.id = this.userId.value;
+    this.customer.name = this.name.value;
+    this.customer.gender = this.gender.value;
+    this.customer.skills = this.skills.value;
+    this.customer.desc = this.about.value;
+    this.customer.password = this.password.value;
+    this.custService.addCustomer(this.customer).subscribe(
+      {
+        next: (response) => {
+          this.toastMessage = `Customer Registered Succesfully,
+                               Redirecting to Login Page...`;
+          this.toastBgc = 'text-bg-success';
+          this.showToast();
+        },
+        complete: () => {
+          console.log('complete');
+          setTimeout(() => {
+            console.log('waiting...')
+            this.router.navigate(["/login"]);
+          }, 3000);
+        },
+        error: (err) => {
+          console.log(err);
+          this.toastMessage = 'Customer Registration Failed!';
+          this.toastBgc = 'text-bg-danger';
+          this.toastMessage = err.error;
+          this.showToast();
+        }
+      }
+    );
+  }
+
+  showToast() {
+    const toastLiveExample = document.getElementById('displayToast') as HTMLElement;
+    const toast = new bootstrap.Toast(toastLiveExample)
+    toast.show();
   }
 
   get userId(): FormControl {
@@ -60,7 +92,7 @@ export class AddCustComponent implements OnInit {
   get skills(): FormControl {
     return this.registerForm.get('skills') as FormControl;
   }
-  
+
   get about(): FormControl {
     return this.registerForm.get('about') as FormControl;
   }

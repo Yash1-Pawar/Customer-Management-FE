@@ -22,8 +22,10 @@ export class ServiceService {
 
   // register
   addCustomer(customer: Customer): Observable<any> {
-    console.log(customer)
-    return this.httpClient.post(this.baseUrlForAuth + "registerUser", customer);
+    let options = {
+        responseType: 'text' as 'json'
+    }
+    return this.httpClient.post(this.baseUrlForAuth + "registerUser", customer, options);
   }
 
   getAllCustomers(): Observable<any> {

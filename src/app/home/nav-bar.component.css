@@ -1,11 +1,11 @@
 .heading {
-    font-size: 5em;
+    font-size: 5rem;
 }
 
 .homy{
     display: flex;
     flex-direction: column;
-    min-height: 90vh;
+    min-height: 72vh;
     align-items: center;
     justify-content: center;
 }
