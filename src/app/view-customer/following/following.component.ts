@@ -85,7 +85,7 @@ export class FollowingComponent implements OnInit {
 
   setLoggedInUser() {
     let userId = localStorage.getItem('userId');
-    if(userId != null) {
+    if (userId != null) {
       this.custService.getCustomerById(userId).subscribe(
         {
           next: (loggedInUser) => {
@@ -102,7 +102,7 @@ export class FollowingComponent implements OnInit {
   follow(followingId: string) {
     this.custService.follow(this.loggedInUser.id, followingId).subscribe(
       {
-        next: (response)=> {
+        next: (response) => {
           console.log(response);
           this.setLoggedInUser();
         },
@@ -114,17 +114,19 @@ export class FollowingComponent implements OnInit {
   }
 
   unfollow(followingId: string) {
-    this.custService.unfollow(this.loggedInUser.id, followingId).subscribe(
-      {
-        next: (response)=> {
-          console.log(response);
-          this.setLoggedInUser();
-        },
-        error: (err) => {
-          console.error(err)
+    if (confirm("Do you want to Unfollow?")) {
+      this.custService.unfollow(this.loggedInUser.id, followingId).subscribe(
+        {
+          next: (response) => {
+            console.log(response);
+            this.setLoggedInUser();
+          },
+          error: (err) => {
+            console.error(err)
+          }
         }
-      }
-    );
+      );
+    }
   }
 
 }
