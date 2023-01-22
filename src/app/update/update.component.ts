@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../model/Cutomer';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ServiceService } from '../service.service';
+import { ToastBgcEnum } from '../utility/ToastBgcEnum';
+import { ToastUtility } from '../utility/ToastUtility';
 
 @Component({
   selector: 'app-update',
@@ -47,14 +49,16 @@ export class UpdateComponent implements OnInit {
       this.custService.updateCustomer(this.customer).subscribe(
         {
           next: (res) => {
+            ToastUtility.showToast('Customer Updated Successfully', ToastBgcEnum.SUCCESS);
+            console.log(res);
             this.router.navigate(["/customers"]);
-            console.log(res)
           },
           error: (error) => {
             if (error.status == 403) {
               this.alertTrigger('You do not have permission to update user!', 'danger');
             }
-            console.error(error)
+            console.error(error);
+            ToastUtility.showToast('Customer Updation Failed!', ToastBgcEnum.FAILURE)
           }
         }
       );

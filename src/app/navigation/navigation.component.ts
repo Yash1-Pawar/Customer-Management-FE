@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastBgcEnum } from '../utility/ToastBgcEnum';
+import { ToastUtility } from '../utility/ToastUtility';
 
 @Component({
   selector: 'app-navigation',
@@ -46,6 +48,7 @@ export class NavigationComponent implements OnInit {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       this.loggedin = false;
+      ToastUtility.showToast('Logged out successfully', ToastBgcEnum.WARN);
     }
   }
 

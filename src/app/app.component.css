@@ -1,0 +1,4 @@
+.toast-body {
+    border-bottom-left-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width));
+    border-bottom-right-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width));
+}

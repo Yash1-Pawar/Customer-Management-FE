@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Customer } from 'src/app/model/Cutomer';
 import { NavigationComponent } from 'src/app/navigation/navigation.component';
 import { ServiceService } from 'src/app/service.service';
+import { ToastBgcEnum } from 'src/app/utility/ToastBgcEnum';
+import { ToastUtility } from 'src/app/utility/ToastUtility';
 
 @Component({
   selector: 'app-followers',
@@ -105,9 +107,11 @@ export class FollowersComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.setLoggedInUser();
+          ToastUtility.showToast('You started following ' + followingId, ToastBgcEnum.SUCCESS);
         },
         error: (err) => {
-          console.error(err)
+          console.error(err);
+          ToastUtility.showToast('Server Error', ToastBgcEnum.FAILURE);
         }
       }
     );
@@ -120,9 +124,11 @@ export class FollowersComponent implements OnInit {
           next: (response) => {
             console.log(response);
             this.setLoggedInUser();
+            ToastUtility.showToast('You Unfollowed ' + followingId, ToastBgcEnum.WARN);
           },
           error: (err) => {
-            console.error(err)
+            console.error(err);
+            ToastUtility.showToast('Server Error', ToastBgcEnum.FAILURE);
           }
         }
       );
@@ -136,9 +142,11 @@ export class FollowersComponent implements OnInit {
           next: (response) => {
             console.log(response);
             this.setLoggedInUser();
+            ToastUtility.showToast('You Removed ' + followingId, ToastBgcEnum.WARN);
           },
           error: (err) => {
             console.error(err)
+            ToastUtility.showToast('Server Error', ToastBgcEnum.FAILURE);
           }
         }
       );

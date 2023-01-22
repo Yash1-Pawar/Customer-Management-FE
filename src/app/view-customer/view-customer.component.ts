@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Customer } from '../model/Cutomer';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ServiceService } from '../service.service';
+import { ToastBgcEnum } from '../utility/ToastBgcEnum';
+import { ToastUtility } from '../utility/ToastUtility';
 
 @Component({
   selector: 'app-view-customer',
@@ -95,9 +97,11 @@ export class ViewCustomerComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.setLoggedInUser();
+          ToastUtility.showToast('You started following ' + followingId, ToastBgcEnum.SUCCESS);
         },
         error: (err) => {
           console.error(err)
+          ToastUtility.showToast('Server Error', ToastBgcEnum.FAILURE);
         }
       }
     );
@@ -110,9 +114,11 @@ export class ViewCustomerComponent implements OnInit {
           next: (response) => {
             console.log(response);
             this.setLoggedInUser();
+            ToastUtility.showToast('You Unfollowed ' + followingId, ToastBgcEnum.WARN);
           },
           error: (err) => {
             console.error(err)
+            ToastUtility.showToast('Server Error', ToastBgcEnum.FAILURE);
           }
         }
       );

@@ -4,6 +4,8 @@ import { Login } from '../model/Login';
 import { ServiceService } from '../service.service';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { Router } from '@angular/router';
+import { ToastUtility } from '../utility/ToastUtility';
+import { ToastBgcEnum } from '../utility/ToastBgcEnum';
 
 @Component({
   selector: 'app-login',
@@ -41,9 +43,11 @@ export class LoginComponent implements OnInit {
           this.navigationComponent.loggedin = true;
         },
         complete: () => {
+          ToastUtility.showToast('Login Successful', ToastBgcEnum.SUCCESS);
           this.router.navigate(['/home'])
         },
         error: (error) => {
+          ToastUtility.showToast('Login Failed!', ToastBgcEnum.FAILURE);
           console.log(error);
         }
       }

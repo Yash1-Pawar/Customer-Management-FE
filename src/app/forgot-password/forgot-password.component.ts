@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Validator } from '../add-cust/PasswordValidator';
 import { ResetPassword } from '../model/ResetPassword';
 import { ServiceService } from '../service.service';
+import { ToastBgcEnum } from '../utility/ToastBgcEnum';
+import { ToastUtility } from '../utility/ToastUtility';
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,12 +35,14 @@ export class ForgotPasswordComponent implements OnInit {
       {
         next: (response) => {
           console.log(response);
+          ToastUtility.showToast('Password Reset Successfully', ToastBgcEnum.SUCCESS);
         },
         complete: () => {
           this.router.navigate(['/home'])
         },
         error: (error:any) => {
           console.error(error);
+          ToastUtility.showToast('Password Reset Failed!', ToastBgcEnum.FAILURE)
         }
       }
     );

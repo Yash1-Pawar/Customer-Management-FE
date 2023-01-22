@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { Customer } from '../model/Cutomer';
 import { ServiceService } from '../service.service';
+import { ToastBgcEnum } from '../utility/ToastBgcEnum';
+import { ToastUtility } from '../utility/ToastUtility';
 import { Validator } from './PasswordValidator';
 
 @Component({
@@ -14,9 +16,6 @@ import { Validator } from './PasswordValidator';
 export class AddCustComponent implements OnInit {
 
   customer: Customer = new Customer;
-
-  toastMessage?: string;
-  toastBgc?:string;
 
   constructor(private custService: ServiceService, private router: Router) {
   }
@@ -48,33 +47,26 @@ export class AddCustComponent implements OnInit {
     this.custService.addCustomer(this.customer).subscribe(
       {
         next: (response) => {
-          this.toastMessage = `Customer Registered Succesfully,
-                               Redirecting to Login Page...`;
-          this.toastBgc = 'text-bg-success';
-          this.showToast();
+          let toastMessage = `Customer Registered Succesfully,
+                               Login to start experiencing the app...`;
+          ToastUtility.showToast(toastMessage, ToastBgcEnum.SUCCESS);
         },
         complete: () => {
-          console.log('complete');
-          setTimeout(() => {
-            console.log('waiting...')
-            this.router.navigate(["/login"]);
-          }, 3000);
+          this.router.navigate(["/login"]);
         },
         error: (err) => {
           console.log(err);
-          this.toastMessage = 'Customer Registration Failed!';
-          this.toastBgc = 'text-bg-danger';
-          this.toastMessage = err.error;
-          this.showToast();
+          let toastMessage = '';
+          if(err.status == 400){
+           toastMessage = err.error;
+          }
+          else{
+            toastMessage = 'Customer Registration Failed!';
+          }
+          ToastUtility.showToast(toastMessage, ToastBgcEnum.FAILURE);
         }
       }
     );
-  }
-
-  showToast() {
-    const toastLiveExample = document.getElementById('displayToast') as HTMLElement;
-    const toast = new bootstrap.Toast(toastLiveExample)
-    toast.show();
   }
 
   get userId(): FormControl {
